@@ -9,6 +9,7 @@ services:
     env_file:
       - env
     volumes:
+      - ~/.npm:/var/www/html/.npm
       - magento-data:/var/www/html
       - /home/sascha/workspace/mergedmedia/mywoodshop-magento2-theme:/var/www/html/app/design/frontend/mergedmedia/mywoodshop
   db:

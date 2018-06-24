@@ -34,6 +34,13 @@ RUN chsh -s /bin/bash www-data
 RUN chown -R www-data:www-data /var/www
 RUN su www-data -c "composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $INSTALL_DIR $MAGENTO_VERSION"
 
+# Install Node, NVM, NPM and Grunt
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -y nodejs build-essential \
+    && curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh \
+    && npm i -g grunt-cli yarn
+
 RUN cd $INSTALL_DIR \
     && find . -type d -exec chmod 770 {} \; \
     && find . -type f -exec chmod 660 {} \; \

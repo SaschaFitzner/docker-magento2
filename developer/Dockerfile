@@ -31,6 +31,13 @@ RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype
 
 RUN chsh -s /bin/bash www-data
 
+# Install Node, NVM, NPM and Grunt
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -y nodejs build-essential \
+    && curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh \
+    && npm i -g grunt-cli yarn
+
 RUN cd /tmp && \ 
   curl https://codeload.github.com/magento/magento2/tar.gz/$MAGENTO_VERSION -o $MAGENTO_VERSION.tar.gz && \
   tar xvf $MAGENTO_VERSION.tar.gz && \
